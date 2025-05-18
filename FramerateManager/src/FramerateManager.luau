@@ -3,7 +3,6 @@ local RunService = game:GetService("RunService")
 type funcSettings = {
 	FrameRate:number?,
 	Paused:boolean?,
-	
 }
 
 local FramerateManager = {}
@@ -11,7 +10,7 @@ FramerateManager.__index = FramerateManager
 
 FramerateManager.HBTasks = {}
 
-function FramerateManager.CreateHBJob(job:(deltaTime:number)->(),Fsettings:funcSettings)
+function FramerateManager.new(job:(deltaTime:number)->(),Fsettings:funcSettings)
 	local self = setmetatable({},FramerateManager)
 	self.Paused = Fsettings.Paused or false
 	self.FrameRate = Fsettings.FrameRate
@@ -35,7 +34,7 @@ function FramerateManager:SetPaused(bool:boolean)
 end
 
 function FramerateManager:Remove()
-	local pos = table.find(FramerateManager.HBTasks,self.Job)
+	local pos = table.find(FramerateManager.HBTasks,self)
 	table.remove(FramerateManager.HBTasks,pos)
 end
 
